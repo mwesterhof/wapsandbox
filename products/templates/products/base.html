@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load products_tags %}
+{% load staticfiles %}
+
+{% block additional_head %}
+    {% if parent_page.canonical_products_page %}
+    <link rel="canonical" href="{{ parent_page.canonical_products_page.url }}" />
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-3">
+        <h1 class="my-4">{{ self.title }}</h1>
+        {% render_categories %}
+
+        {# i ain't no frontender #}
+        <br /><br />
+        {% block flow_content %}{% endblock %}
+    </div>
+    <!-- /.col-lg-3 -->
+
+    <div class="col-lg-9">
+        {% block product_content %}{% endblock %}
+    </div>
+    <!-- /.col-lg-9 -->
+
+</div>
+<!-- /.row -->
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends "news/base.html" %}
+
+{% load app_pages_tags %}
+
+
+{% block news_content %}
+<ul>
+    {% for article in object_list %}
+    <li>
+        <a href="{% app_page_url "article_detail" pk=article.pk %}">{{ article }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock news_content %}

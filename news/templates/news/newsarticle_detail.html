@@ -1,0 +1,13 @@
+{% extends "news/base.html" %}
+
+{% load app_pages_tags %}
+
+
+{% block news_content %}
+<h1>{{ object.title }}</h1>
+{{ object.body|linebreaks }}
+
+{% if object.highlighted_product %}
+<a href="{% app_page_url "product_detail" app_page=parent_page.product_page pk=object.highlighted_product.pk %}">{{ object.highlighted_product }}</a>
+{% endif %}
+{% endblock news_content %}
