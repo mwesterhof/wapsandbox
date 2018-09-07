@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'home',
     'products',
     'news',
-    'wizard',
+    'gd',
+    # 'wizard',
     'search',
 
     'wagtail.contrib.forms',
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'taggit',
     'wagtailtrans',
     'wagtail_app_pages',
+    'graphene_django',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,12 +56,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -167,3 +171,5 @@ BASE_URL = 'http://example.com'
 
 WAGTAILTRANS_SYNC_TREE = True
 WAGTAILTRANS_LANGUAGES_PER_SITE = False
+
+DEFAULT_AUTHENTICATION_CLASSES = []

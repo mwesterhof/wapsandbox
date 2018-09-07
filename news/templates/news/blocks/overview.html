@@ -1,0 +1,15 @@
+<div class="newsOverview">
+    <h2>{{ self.title }}</h2>
+
+    <i v-if="loading">loading...</i>
+    <ul>
+        <li v-for="article in articles">
+            <a v-bind:href="article.url">
+                [[ article.title ]]
+            </a>
+            ([[ article.like_count ]] likes)
+            <button v-on:click="likeArticle(article)">+</button>
+            <button v-on:click="dislikeArticle(article)">-</button>
+        </li>
+    </ul>
+</div>

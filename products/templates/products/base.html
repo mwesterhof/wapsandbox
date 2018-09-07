@@ -4,9 +4,6 @@
 {% load staticfiles %}
 
 {% block additional_head %}
-    {% if parent_page.canonical_products_page %}
-    <link rel="canonical" href="{{ parent_page.canonical_products_page.url }}" />
-    {% endif %}
 {% endblock %}
 
 {% block content %}

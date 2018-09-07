@@ -1,9 +1,11 @@
 {% extends "news/base.html" %}
 
 {% load app_pages_tags %}
+{% load wagtailcore_tags %}
 
 
 {% block news_content %}
+{% comment %}
 <ul>
     {% for article in object_list %}
     <li>
@@ -11,4 +13,64 @@
     </li>
     {% endfor %}
 </ul>
+{% endcomment %}
+
+
+{% for child in self.content %}
+{% include_block child %}
+{% endfor %}
+
 {% endblock news_content %}
+
+{% block additional_scripts %}
+<script src="//cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+<script src="//cdn.jsdelivr.net/npm/vue-resource@1.3.5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-cookies@1.5.6/vue-cookies.min.js"></script>
+
+<script>
+    // Vue.http.headers.common['X-CSRFToken'] = Vue.cookies['csrftoken']
+
+    var overviewApp = new Vue({
+        delimiters: ['[[', ']]'],
+        el: '.newsOverview',
+        mounted: function(){
+            this.fetchArticles()
+        },
+        data: {
+            loading: false,
+            articles: []
+        },
+        methods: {
+            fetchArticles: function(){
+                this.loading = true
+                this.$http.get('api/articles/')
+                    .then(function(response){
+                        this.articles = response.data
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+                this.loading = false
+            },
+            likeArticle: function(article){
+                this.$http.patch('api/articles/' + article.id + '/like_article/')
+                    .then(function(response){
+                        this.fetchArticles()
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+            },
+            dislikeArticle: function(article){
+                this.$http.patch('api/articles/' + article.id + '/dislike_article/')
+                    .then(function(response){
+                        this.fetchArticles()
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+            }
+        }
+    })
+</script>
+{% endblock %}

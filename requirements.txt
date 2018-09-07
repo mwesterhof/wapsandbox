@@ -1,5 +1,5 @@
 Django>=2.0,<2.1
 wagtail>=2.1,<2.2
-django-formtools==2.1
 wagtail-app-pages==0.2.4
 wagtailtrans==2.0.2
+graphene-django==2.1.0
